@@ -110,7 +110,7 @@ onMounted(() => {
                 :type="notificationType"
                 :mundur="'iya'"
             />
-            <div id="authentication-modal" v-if="showModal && !ada" tabindex="-1" aria-hidden="true"
+            <div id="authentication-modal" v-if="showModal" tabindex="-1" aria-hidden="true"
               class=" fixed overflow-hidden overflow-y-auto top-20 left-0 right-0 flex justify-center items-center  ">
               <div class="relative p-4 w-full max-w-md max-h-full">
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700  border border-gray-500">
