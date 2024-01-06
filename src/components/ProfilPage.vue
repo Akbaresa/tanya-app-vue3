@@ -6,6 +6,7 @@ import ModalPekerjaan from './ModalPekerjaan.vue'
 
 
 const activeTab = ref('pertanyaan')
+const isiTab = ref(false)
 const username = ref('')
 const email = ref('')
 const showModalPekerjaan = ref(false)
@@ -19,9 +20,13 @@ const pekerjaan = ref({
     tahunSelesai : '' , 
 })
 
-const setActiveTab = (tab) => {
+const setActiveTab = (tab , isi) => {
   activeTab.value = tab;
+  isiTab.value = isi
+  console.log(isi)
 }
+
+// const getActiveTab = activeTab.value
 
 const getUser = async () => {
     await profil()
@@ -74,7 +79,7 @@ watch(pekerjaan, () => {
             <div class="mt-10">
               <div class="flex flex-row justify-between ml-20 mr-20 flex-none pt-20">
                 <div class="flex container w-3/5">
-                  <div onmouseenter="imgHover()" onmouseleave="imgHover()"
+                  <div
                     class="w-36 h-36 relative flex-none overflow-hidden rounded-full hover:cursor-pointer">
                     <div>
                       <img src="/image/esa.png" alt="" style="margin-top: -20px;" />
@@ -149,12 +154,13 @@ watch(pekerjaan, () => {
                     <a href="#" class="font-medium text-grey-600 text-grey-500 hover:underline">{{ email }}</a>
                     <ul class="flex flex-wrap -mb -px">
                       <li class="mr-2">
-                        <button @click.prevent="setActiveTab('pertanyaan')"
+                        <button @click.prevent="setActiveTab('pertanyaan' , true)"
                           :class="{ 'text-blue-400': activeTab === 'pertanyaan', 'border-blue-700': activeTab === 'pertanyaan' }"
                           id="pertanyaan-tab" :aria-selected="activeTab === 'pertanyaan'" type="button" role="tab"
                           data-tabs-button="#pertanyaan"
                           class="inline-block p-4 border-b-2 hover:text-blue-400 hover:border-blue-700 rounded-t-lg">pertanyaan
                         </button>
+
                       </li>
                       <li class="mr-2">
                         <button @click.prevent="setActiveTab('komentar')"
@@ -173,7 +179,7 @@ watch(pekerjaan, () => {
                         </button>
                       </li>
                       <li class="mr-2">
-                        <button @click.prevent="setActiveTab('pengikut')"
+                        <button @click.prevent="setActiveTab('pengikut', true)"
                           :class="{ 'text-blue-400': activeTab === 'pengikut', 'border-blue-700': activeTab === 'pengikut' }"
                           id="pengikut-tab" :aria-selected="activeTab === 'pengikut'" type="button" role="tab"
                           data-tabs-button="#pengikut"
@@ -190,7 +196,50 @@ watch(pekerjaan, () => {
                       </li>
                     </ul>
                     <div class="mt-3">
-                      
+                      <div v-if="activeTab === 'pertanyaan' && isiTab === true"
+                      class="block mt-2 rounded-lg  shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] bg-gray-800 w-[60%]">
+                          <div class="border-b-2 px-6 flex py-3 border-gray-800 ">
+                          <img class="w-10 h-10 rounded-full ml-2 mt-2 mr-3" src="/image/profil1.png" alt="Rounded avatar">
+                              <div>
+                                  <a type="button" class="flex items-center mt-1 hover:underline cursor-pointer text-teal-400">orang </a>
+                                  <p class="text-sm text-gray-400">1202102</p>
+                              </div>
+                          </div>
+                          <div class="pl-6 mr-3 ml-3 text-white flex pb-3">
+                              <div class="px-2">
+                                  <p class="font-semibold">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error, reiciendis!</p>
+                                  <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit dignissimos consequuntur esse quidem commodi, nisi modi, pariatur expedita beatae voluptates blanditiis. Autem beatae inventore dolor quam sint debitis voluptatem, incidunt hic asperiores commodi placeat tenetur ducimus id minima illum. Minus fugiat porro aliquam facilis ab dolores minima quibusdam facere commodi tempora fugit laboriosam, nesciunt illum? Eligendi temporibus, quia harum cum consequuntur nemo incidunt impedit veniam tempora corporis et molestias nobis laboriosam laborum dignissimos eos natus praesentium quisquam aliquid, non in. Quia minima ullam quos delectus? Ea eaque, quod minima iusto asperiores tenetur, delectus optio, repellendus laboriosam laborum illum consectetur temporibus!</p>
+                              </div>
+                          </div>
+                          <div class=" w-[90%] mx-auto flex flex-col gap-y-5">
+                              <div class="flex flex-row gap-x-3">
+                                  <button type="button"
+                                  class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+                  
+                                  <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                      viewBox="0 0 18 18">
+                                      <path
+                                      d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z" />
+                                  </svg>
+                                  <span class="sr-only">Icon description</span>
+                                  <p class=" ml-3">11</p>
+                                  </button>
+                                  <button type="button"
+                                  @click="lihatKomen(pertanyaan.id)"
+                                  class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2 text-center inline-flex items-center hs-accordion-toggle hs-accordion-active:text-blue-600 group   gap-x-3  transition  dark:hs-accordion-active:text-blue-600 dark:text-gray-200 dark:hover:text-gray-400"
+                                  aria-controls="hs-basic-collapse-one">
+                                  <img src="/image/Chat.png" class="w-5" style="width: 20px;" alt="">
+                                  <p class="px-3"> 11 </p>
+                                  </button>
+                              </div>
+          
+            
+                          </div>
+                      </div>
+                      <div v-else class="">
+                        <img src="/image/mail.webp" class=" w-32 " alt="">
+                        <p>tidak ada pertanyaan </p>
+                      </div>
                     </div>
                   </div>
                 </div>
