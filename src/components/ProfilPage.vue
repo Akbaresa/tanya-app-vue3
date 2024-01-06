@@ -2,7 +2,9 @@
 import {ref , onMounted , watch} from 'vue'
 import { profil } from '@/api/profil'
 import { getPekerjaan } from '@/api/pekerjaan'
+import { getPendidikan } from '@/api/pendidikan'
 import ModalPekerjaan from './ModalPekerjaan.vue'
+import ModalPendidikan from './ModalPendidikan.vue'
 
 
 const activeTab = ref('pertanyaan')
@@ -10,7 +12,9 @@ const isiTab = ref(false)
 const username = ref('')
 const email = ref('')
 const showModalPekerjaan = ref(false)
+const showModalPendidikan = ref(false)
 const iyaPekerjaan = ref('')
+const iyaPendidikan = ref('')
 
 const pekerjaan = ref({
     id: '' , 
@@ -18,6 +22,14 @@ const pekerjaan = ref({
     perusahaan : '',
     tahunMulai : '',
     tahunSelesai : '' , 
+})
+
+const pendidikan = ref({
+    id: '' , 
+    sekolah : '',
+    jurusan : '',
+    jenisGelar : '',
+    tahunLulus : '' , 
 })
 
 const setActiveTab = (tab , isi) => {
@@ -35,6 +47,7 @@ const getUser = async () => {
         username.value = response.data.username
         email.value = response.data.email
         getPekerjaanLokal(username.value)
+        getPendidikanLokal(username.value)
     })
     .catch(error => {
         console.log(error)
@@ -48,6 +61,13 @@ const closeModalPekerjaan = async () => {
 const openModalPekerjaan = async () => {
   showModalPekerjaan.value = true
 }
+const openModalPendidikan = async () => {
+  showModalPendidikan.value = true
+}
+const closeModalPendidikan = async () => {
+  showModalPendidikan.value = false
+}
+
 const getPekerjaanLokal = async (username) => {
   await getPekerjaan(username)
   .then(response => {
@@ -61,6 +81,21 @@ const getPekerjaanLokal = async (username) => {
   .catch(
     iyaPekerjaan.value = 'error',
     console.log(iyaPekerjaan.value)
+  )
+}
+
+const getPendidikanLokal = async (username) => {
+  await getPendidikan(username)
+  .then(response => {
+    pendidikan.value.sekolah = response.data.sekolah
+    pendidikan.value.jurusan = response.data.jurusan
+    pendidikan.value.jenisGelar = response.data.jenisGelar
+    pendidikan.value.tahunLulus = response.data.tahunLulus
+    pendidikan.value.id = response.data.idKredPendidikan
+    iyaPendidikan.value = 'ada'
+  })
+  .catch(
+    iyaPendidikan.value = 'gaada'
   )
 }
 
@@ -133,12 +168,20 @@ watch(pekerjaan, () => {
                         ></ModalPekerjaan>
         
         
-                      <button @click="openModalPendidikan" class="text-base mt-2 flex hover:underline text-blue-500 gap-2"><img
+                      <button @click="openModalPendidikan" v-if="iyaPendidikan === 'gaada'" class="text-base mt-2 flex hover:underline text-blue-500 gap-2"><img
                           src="/image/mortarboard_2.png" alt="icon pekerjaan" class="w-5 h-5 mr-1 mt-0.5">Tambahkan Kredensial
                         Pendidikan</button>
-        
+                        
+                        <button @click="openModalPendidikan"  v-else type="button" href="" class="text-base mt-2 flex text-blue-500 gap-2"><img src="/image/briefcase.png"
+                          alt="icon pekerjaan" class="w-5 h-5 mr-1 mt-0.5" ><p class=" text-white no-underline">{{ pendidikan.sekolah }} dengan {{pendidikan.jurusan }} dan {{pendidikan.jenisGelar }} sampai {{ pendidikan.tahunLulus }}</p>  <p class=" hover:underline">edit</p> </button>
                         <!-- <ModalPendidikan :closeModal="closeModalPendidikan" :showModal="showModalPendidikan"></ModalPendidikan> -->
-        
+                      
+                        <ModalPendidikan
+                        :tutup-modal="closeModalPendidikan"
+                        :show-modal="showModalPendidikan"
+                        :data="pendidikan"
+                        ></ModalPendidikan>
+
                       <button @click="openModalLokasi" class="text-base mt-2 flex hover:underline text-blue-500 gap-2"><img src="/image/location_2.png"
                           alt="icon pekerjaan" class="w-5 h-5 mr-1 mt-0.5">Tambahkan Kredensial Lokasi</button>
                           <!-- <ModalLokasi :showModal="showModalLokasi" :closeModal="closeModalLokasi"></ModalLokasi> -->
