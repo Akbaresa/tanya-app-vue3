@@ -1,6 +1,7 @@
 <script setup>
 import {defineProps,ref,onMounted} from 'vue'
 import { tambahPendidikan, updatePendidikan } from '@/api/pendidikan';
+import Notification from './Notification.vue';
 
 const sekolah = ref('')
 const jurusan = ref('')
@@ -22,6 +23,7 @@ const props = defineProps({
 const postData = async () => {
     if (!sekolah.value || !jurusan.value || !jenisGelar.value || !tahunLulus.value){
         return notif('form data harus terisi' , 'error')
+
     }
     try {
         const formData = ref({
@@ -94,6 +96,12 @@ onMounted(() => {
 </script>
 
 <template>
+      <Notification
+      :show="showNotification"
+      :message="notificationMessage"
+      :type="notificationType"
+      :mundur="'iya'"
+    />
     <div id="authentication-modal" v-if="showModal" tabindex="-1" aria-hidden="true" class=" fixed overflow-hidden overflow-y-auto top-20 left-0 right-0 flex justify-center items-center  ">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <!-- Modal content -->
@@ -115,15 +123,15 @@ onMounted(() => {
                 <form @submit.prevent="postData" class="space-y-4" action="#">
                     <div>
                         <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sekolah</label>
-                        <input v-model="sekolah" type="text" name="sekolah" id="sekolah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="posisi di perusahaan" required>
+                        <input v-model="sekolah" type="text" name="sekolah" id="sekolah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="posisi di perusahaan" >
                     </div>
                     <div>
                         <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jurusan</label>
-                        <input v-model="jurusan" type="text" name="jurusan" id="jurusan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="nama perusahaan" required>
+                        <input v-model="jurusan" type="text" name="jurusan" id="jurusan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="nama perusahaan" >
                     </div>
                     <div>
                         <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Gelar</label>
-                        <input v-model="jenisGelar" type="text" name="jenisGelar " id="jenisGelar " class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="nama perusahaan" required>
+                        <input v-model="jenisGelar" type="text" name="jenisGelar " id="jenisGelar " class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="nama perusahaan" >
                     </div>
                     <label  class="block text-sm font-medium text-gray-900 dark:text-white">Tahun Lulus</label>
                     <div class="relative max-w-sm">

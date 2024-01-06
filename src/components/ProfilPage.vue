@@ -172,7 +172,7 @@ watch(pekerjaan, () => {
                           src="/image/mortarboard_2.png" alt="icon pekerjaan" class="w-5 h-5 mr-1 mt-0.5">Tambahkan Kredensial
                         Pendidikan</button>
                         
-                        <button @click="openModalPendidikan"  v-else type="button" href="" class="text-base mt-2 flex text-blue-500 gap-2"><img src="/image/briefcase.png"
+                        <button @click="openModalPendidikan"  v-else type="button" href="" class="text-base mt-2 flex text-blue-500 gap-2"><img src="/image/mortarboard_2.png"
                           alt="icon pekerjaan" class="w-5 h-5 mr-1 mt-0.5" ><p class=" text-white no-underline">{{ pendidikan.sekolah }} dengan {{pendidikan.jurusan }} dan {{pendidikan.jenisGelar }} sampai {{ pendidikan.tahunLulus }}</p>  <p class=" hover:underline">edit</p> </button>
                         <!-- <ModalPendidikan :closeModal="closeModalPendidikan" :showModal="showModalPendidikan"></ModalPendidikan> -->
                       
