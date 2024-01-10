@@ -1,16 +1,8 @@
-import { getApiHeaderService } from "./apiService";
-import { getTokenCookie } from './cookie';
-
-const apiHeaderService = getApiHeaderService();
+import { apiHeaderService } from "./apiService";
 
 export const profil = async () => {
     try {
-        const token = getTokenCookie();
-        const response = await apiHeaderService.get('/user/current', {
-            headers: {
-                'X-API-TOKEN': token,
-            },
-        });
+        const response = await apiHeaderService.get('/user/current');
         return response.data;
     } catch (error) {
         console.error(error);

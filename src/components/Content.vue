@@ -27,6 +27,7 @@ const postDataKomentar = async (pertanyaanId) => {
         await postKomentar(pertanyaanId , komentar.value[pertanyaanId])
         .then(response => {
             console.log(response)
+            komentar.value[pertanyaanId] = ''
             return notif('berhasil mengirim komentar' , 'success')
         })
         .catch(error =>{

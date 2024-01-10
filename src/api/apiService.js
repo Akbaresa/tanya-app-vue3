@@ -7,18 +7,18 @@ export const apiService = axios.create({
   baseURL: URI
 })
 
-const createApiHeaderService = () => {
-  const token = getTokenCookie();
-  
-  return axios.create({
-    baseURL: URI,
-    headers: {
-      'X-API-TOKEN': token,
-    },
-  });
-};
+export const apiHeaderService =  axios.create({
+    baseURL: URI
+});
 
-export const getApiHeaderService = () => {
-  return createApiHeaderService();
-};
+apiHeaderService.interceptors.request.use(
+  (config) => {
+    const token = getTokenCookie();
+    config.headers['X-API-TOKEN'] = token;
 
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);

@@ -148,7 +148,10 @@ watch(pekerjaan, () => {
                         <div class="">
                           <a href="#" class="font-light text-white ">0 Pengikut</a>
                           <a href="#" class="font-light text-white  ml-2">0 Mengikuti</a>
+                          
                         </div>
+                        <button type="button" class="inline-flex mt-2 text-white bg-blue-400 dark:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2 text-center">follow <img src="/image/Plus.png" class="w-5 ml-2" alt=""></button>
+
                       </div>
                     </div>
             

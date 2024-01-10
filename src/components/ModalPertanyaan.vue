@@ -5,7 +5,7 @@ import Notification from './Notification.vue';
 
 const activeTab = ref('profile')
 
-defineProps({
+const props = defineProps({
     showModal: Boolean,
     closeModal : Function
 })
@@ -40,7 +40,11 @@ const postData = async () => {
     await tambahPertanyaan(data.value , 'token0')
     .then(response => {
         console.log(response)
+        header.value = ''
+        deskripsi.value = ''
+        props.closeModal()
         return notif('pertanyaan berhasil terkirim' , 'success')
+
     })
     .catch(error => {
       if (error.response) {

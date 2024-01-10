@@ -1,7 +1,6 @@
 import {apiService } from "./apiService";
-import { getApiHeaderService } from "./apiService";
+import { apiHeaderService } from "./apiService";
 
-const apiHeaderService = getApiHeaderService();
 
 export const getPekerjaan = async (username) => {
     try {

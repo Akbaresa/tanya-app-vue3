@@ -72,7 +72,7 @@ onMounted(() => {
           <div class="pl-6 mx-3 text-white flex pb-3">
             <div class="px-2 mt-3">
               <p class="font-semibold mb-2">{{ pertanyaan.tanggal }}</p>
-              <p class="font-semibold">{{ pertanyaan.header }} lorem100</p>
+              <p class="font-semibold">{{ pertanyaan.header }}</p>
               <p class="mb-2">{{ pertanyaan.deskripsi }}</p>
             </div>
           </div>
