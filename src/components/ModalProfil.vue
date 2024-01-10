@@ -1,11 +1,17 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { RouterLink } from 'vue-router';
-import { ref , onMounted  } from 'vue'
+import { RouterLink , useRouter } from 'vue-router';
+import { ref , onMounted } from 'vue'
+import { logout } from '@/api/cookie';
 
 const props = defineProps(['show' , 'username'])
-
+const route = useRouter()
 const nama = ref('')
+
+const keluar = async () => {
+    logout()
+    route.push('/login')
+}
 
 onMounted(async () => {
     setTimeout(() => {
@@ -33,7 +39,7 @@ onMounted(async () => {
                 class="block px-4 py-2 font-light hover:bg-gray-600 hover:cursor-pointer hover-text-gray-200">Setting</a>
         </li>
         <li>
-            <a type="button" @click="logout"
+            <a type="button" @click="keluar"
                 class="block px-4 py-2 font-light hover:bg-gray-600 hover:cursor-pointer hover-text-gray-200">Keluar</a>
 
         </li>

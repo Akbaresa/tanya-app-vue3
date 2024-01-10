@@ -8,7 +8,6 @@ import ModalPendidikan from './ModalPendidikan.vue'
 import TabPertanyaan from './TabPertanyaan.vue'
 import TabKomentar from './TabKomentar.vue'
 import { getPertanyaan } from '@/api/pertanyaan';
-import Loading from './Loading.vue';
 
 
 const activeTab = ref('pertanyaan')
@@ -61,9 +60,6 @@ const getUser = async () => {
     .catch(error => {
         console.log(error)
         console.log('orang salah')
-    })
-    .finally(response => {
-      loading.value = false
     })
 }
 
@@ -129,9 +125,7 @@ const getPertanyaanByUsername = async (name) => {
 onMounted(() => {
   getUser()
   console.log(username.value + "ini orang")
-  
-  // console.log(isiTab.value + "isi tab woe")
-  // console.log(adaPertanyaan.value + "isi pertanyaan woe")
+
 })
 
 const height = computed(() =>{
