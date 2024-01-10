@@ -1,5 +1,7 @@
-import {apiService , apiHeaderService} from "./apiService";
+import {apiService} from "./apiService";
+import { getApiHeaderService } from "./apiService";
 
+const apiHeaderService = getApiHeaderService();
 export const getPendidikan = async (username) => {
     try {
         const response = await apiService.get(`/pendidikan/${username}`)

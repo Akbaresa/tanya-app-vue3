@@ -7,13 +7,6 @@ export const apiService = axios.create({
   baseURL: URI
 })
 
-export const apiHeaderService = axios.create({
-    baseURL: URI,
-    headers: {
-      'X-API-TOKEN': getTokenCookie()
-    }
-});
-
 const createApiHeaderService = () => {
   const token = getTokenCookie();
   

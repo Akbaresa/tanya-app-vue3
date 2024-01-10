@@ -1,17 +1,26 @@
-import { apiService,  apiHeaderService } from "./apiService";
-import { getTokenCookie } from "./cookie";
+import { apiService } from "./apiService";
+import { getApiHeaderService } from "./apiService";
 
-const token = getTokenCookie()
+const apiHeaderService = getApiHeaderService();
 
 export const tambahPertanyaan = async (data) => {
-    try {
-        const fetch = apiHeaderService(token)
-        const response = fetch.post('/pertanyaan' , data)
-        return response.data
-    } catch(error){
-        console.log(error)
-        throw error
-    }
+  try {
+      const response = apiHeaderService.post('/pertanyaan' , data)
+      return response.data
+  } catch(error){
+      console.log(error)
+      throw error
+  }
+}
+
+export const getPertanyaan = async (username) => {
+  try {
+    const response = apiService.get(`/pertanyaan/${username}`)
+    return response
+  }catch (error){
+    console.log(error)
+    throw error
+  }
 }
 
 export const fetchLazyLoading = async (currentPage, itemPerPage) => {

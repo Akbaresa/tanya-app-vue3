@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import ProfileAllUser from '../components/ProfileAllUser.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +28,12 @@ const router = createRouter({
             path : '/chat',
             name :'chat',
             component : () => import ('../views/ChatView.vue')
+        },
+        {
+            path: '/profile/:username' ,
+            name :'UserProfile',
+            component : ProfileAllUser ,
+            props:true
         }
     ]
 })

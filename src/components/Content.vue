@@ -51,7 +51,7 @@ const fetchDataLazyLoad = async () => {
     loading.value = true;
 
     const newPertanyaan = await fetchLazyLoading(currentPage.value, itemPerPage.value);
-
+    console.log(newPertanyaan)
     if (newPertanyaan.length > 0) {
       pertanyaanList.value = [
         ...pertanyaanList.value,
@@ -164,7 +164,7 @@ const notif = async ( message , type) => {
                 <div class="border-b-2 px-6 flex py-3 border-gray-800 ">
                 <img class="w-10 h-10 rounded-full ml-2 mt-2 mr-3" src="/image/profil1.png" alt="Rounded avatar">
                     <div>
-                        <a type="button" class="flex items-center mt-1 hover:underline cursor-pointer text-teal-400">{{ pertanyaan.username }} </a>
+                      <router-link :to="{ name: 'UserProfile', params: { username: pertanyaan.username } }" class="flex items-center mt-1 hover:underline cursor-pointer text-teal-400">{{ pertanyaan.username }}</router-link>
                         <p class="text-sm text-gray-400">{{ pertanyaan.tanggal }}</p>
                     </div>
                 </div>
@@ -229,12 +229,12 @@ const notif = async ( message , type) => {
                   v-for="komentar in pertanyaan.komentar" :key="komentar.idKomentar">
                   <img src="/image/esa.png" alt="" class="w-10 mb-1 h-10 rounded-full">
                   <div class="flex flex-col ml-3 w-full ">
-                    <a class=" hover:underline cursor-pointer text-teal-400">
-                      {{ komentar.nama }}
+                    <a class=" hover:underline inline-flex cursor-pointer text-teal-400">
+                      {{ komentar.nama }} <p class=" text-zinc-400 hover:no-underline text-sm ml-3 m-auto"> {{ komentar.waktu }}</p>
                     </a>
                     <div class="border-b-2 w-full h-[1px] border-gray-600">
                     </div>
-                    <p class=" text-gray-200 dark:text-gray-200">
+                    <p class=" text-gray-200 pb-3 dark:text-gray-200">
                       {{ komentar.deskripsi }}
                     </p>
                   </div>
