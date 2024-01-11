@@ -1,0 +1,15 @@
+{
+    "firebase": "1:768818726166:web:6e904f1122e1439c9f7c37",
+    "functions": {
+     
+    },
+    "firestore": {
+
+    },
+    "hosting": {
+    },
+    "storage": {
+      "rules": "storage.rules"  
+    }
+  }
+  

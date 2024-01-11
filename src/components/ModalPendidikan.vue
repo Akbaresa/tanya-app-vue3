@@ -23,7 +23,6 @@ const props = defineProps({
 const postData = async () => {
     if (!sekolah.value || !jurusan.value || !jenisGelar.value || !tahunLulus.value){
         return notif('form data harus terisi' , 'error')
-
     }
     try {
         const formData = ref({
@@ -39,6 +38,7 @@ const postData = async () => {
                 sekolah.value = response.data.sekolah,
                 jenisGelar.value = response.data.jenisGelar,
                 tahunLulus.value = response.data.tahunLulus
+                props.tutupModal()
                 return notif('berhasil menambahkan pendidikan' , 'success')
             })
             .catch(error => {
@@ -54,6 +54,7 @@ const postData = async () => {
               sekolah.value = response.data.sekolah,
               jenisGelar.value = response.data.jenisGelar,
               tahunLulus.value = response.data.tahunLulus
+              props.tutupModal()
               return notif('berhasil menambahkan pendidikan' , 'success')
           })
           .catch(error => {

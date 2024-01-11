@@ -1,0 +1,10 @@
+// Firebase Storage Rules
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read;
+      // Additional rules for write permissions if needed
+    }
+  }
+}

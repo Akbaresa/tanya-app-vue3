@@ -148,22 +148,22 @@ watch(pekerjaan, () => {
                   <div
                     class="w-36 h-36 relative flex-none overflow-hidden rounded-full hover:cursor-pointer">
                     <div>
-                      <img src="/image/esa.png" alt="" style="margin-top: -20px;" />
+                      <img src="/image/esa.png" class="rounded-md" alt="" style="margin-top: -20px;" />
                     </div>  
                     <div class="absolute top-0 left-0 w-full h-full  items-center justify-center hidden" id="imgSwap">
                       <img alt="" src="" class="w-16 h-16 cursor-pointer" />
                     </div>
                   </div>
         
-                  <div class="font-medium ml-5 w-full relativfe">
+                  <div class="font-medium ml-5 w-full relative">
                     <div class="flex">
                       <div class="flex-none">
                         <div class="text-white text-3xl">{{ username }}</div>
                       </div>
                     </div>
                     <button
-                      class="outline-2 absolute w-7 h-7 top-0 left-[70%] outline outline-gray-500 rounded-full overflow-hidden">
-                      <img src="" alt="" class="object-center mx-auto w-5 h-auto">
+                      class=" absolute w-7 h-7 top-0 left-[70%]  rounded-full overflow-hidden">
+                      <img src="/image/share_2.png" alt="" class="object-center mx-auto w-5 h-auto">
                     </button>
         
                     <a href="#" class="text-sm text-white text-grey-500 hover:underline">Tambahkan Kredensial Profile</a>
@@ -179,7 +179,7 @@ watch(pekerjaan, () => {
                     <div class="flex">
                       <div class="text-white w-[200%]">Kredensial & Sorotan</div>
                       <button>
-                        <img src="/image/share_2.png" alt="" class="w-[15%] ml-[30%]">
+                        <img src="/image/pen_2.png" alt="" class="w-[12%] ml-[30%]">
                       </button>
                     </div>
         

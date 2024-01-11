@@ -34,6 +34,12 @@ const router = createRouter({
             meta: { requiresAuth: true },
         },
         {
+          path : '/chat-page',
+          name :'chat-page',
+          component : () => import ('../views/ChatPage.vue') ,
+          meta: { requiresAuth: true },
+        },
+        {
             path: '/profile/:username' ,
             name :'UserProfile',
             component : ProfileAllUser ,
@@ -43,7 +49,6 @@ const router = createRouter({
     ]
 })
 
-// Middleware untuk melindungi rute
 const authMiddleware = (to, from, next) => {
     const isAuthenticated = getTokenCookie(); 
   

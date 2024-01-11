@@ -3,6 +3,8 @@ import { ref, onMounted, getCurrentInstance, watch, computed } from 'vue';
 import { getPertanyaan } from '@/api/pertanyaan';
 import { getPekerjaan } from '@/api/pekerjaan'
 import { getPendidikan } from '@/api/pendidikan'
+import { tambahFollow } from '@/api/follow' 
+import { profil } from '@/api/profil';
 import Navbar from '@/components/Navbar.vue';
 import { getUserByUsername } from'@/api/user'
 import TabPertanyaan from './TabPertanyaan.vue';
@@ -97,6 +99,23 @@ const getPertanyaanByUsername = async (name) => {
     });
 };
 
+const postFollow = async () =>{
+  const response = await profil()
+  const nama = response.data.username
+  const data = ref({
+    followerUsername : nama ,
+    followedUsername: username.value
+  })
+  console.log(data)
+  await tambahFollow(data.value)
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}
+
 onMounted(() => {
   if (router.currentRoute.value.params.username) {
     username.value = router.currentRoute.value.params.username;
@@ -150,7 +169,7 @@ watch(pekerjaan, () => {
                           <a href="#" class="font-light text-white  ml-2">0 Mengikuti</a>
                           
                         </div>
-                        <button type="button" class="inline-flex mt-2 text-white bg-blue-400 dark:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2 text-center">follow <img src="/image/Plus.png" class="w-5 ml-2" alt=""></button>
+                        <button @click="postFollow" type="button" class="inline-flex mt-2 text-white bg-blue-400 dark:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2 text-center">follow <img src="/image/Plus.png" class="w-5 ml-2" alt=""></button>
 
                       </div>
                     </div>
