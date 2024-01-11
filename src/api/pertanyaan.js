@@ -3,7 +3,7 @@ import { apiService , apiHeaderService } from "./apiService";
 export const tambahPertanyaan = async (data) => {
   try {
       const response = apiHeaderService.post('/pertanyaan' , data)
-      return response.data
+      return response
   } catch(error){
       console.log(error)
       throw error

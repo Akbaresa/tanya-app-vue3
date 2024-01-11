@@ -2,6 +2,11 @@
 import { ref , defineProps } from 'vue'
 import { tambahPertanyaan } from '@/api/pertanyaan';
 import Notification from './Notification.vue';
+import { storage } from "@/api/firebase";
+import { uploadBytes  , ref as firebaseRef } from "firebase/storage";
+import { tambahGambar } from '@/api/image'
+// import { axios } from 'axios'
+
 
 const activeTab = ref('profile')
 
@@ -12,6 +17,15 @@ const props = defineProps({
 const showNotification = ref(false);
 const notificationMessage = ref('');
 const notificationType = ref('');
+
+const imagePreview = ref(null);
+const selectedImage = ref(null);
+const postDataGambar = ref({
+  namaGambar: null,
+  path: null,
+});
+const inputElement = ref(null);
+const fileInputRef = ref(null);
 
 const notif = async ( message , type) => {
   showNotification.value = true;
@@ -37,11 +51,12 @@ const postData = async () => {
     if(!deskripsi.value || !header.value){
         return notif('form data harus terisi ' , 'error')
     }
-    await tambahPertanyaan(data.value , 'token0')
-    .then(response => {
-        console.log(response)
+    await tambahPertanyaan(data.value)
+    .then(async(response) => {
+        // console.log(response.data.data.id)
         header.value = ''
         deskripsi.value = ''
+        uploadImage(response.data.data.id)
         props.closeModal()
         return notif('pertanyaan berhasil terkirim' , 'success')
 
@@ -54,7 +69,52 @@ const postData = async () => {
     })
 }
 
+const handleImageUpload = (event) => {
+  const file = event.target.files[0];
 
+  if (file) {
+    const imageUrl = URL.createObjectURL(file);
+    fileInputRef.value = event.target;
+    imagePreview.value = imageUrl;
+    selectedImage.value = file;
+    inputElement.value = event.target
+  }
+};
+
+const removeImagePreview = () => {
+  imagePreview.value = null;
+  selectedImage.value = null;
+
+  if (inputElement.value) {
+    inputElement.value.value = null;
+  }
+};
+
+const uploadImage = async (idPertanyaan) => {
+    const fileInput = fileInputRef.value.files[0];
+    if (selectedImage.value) {
+        const pathGambar = `folder/${idPertanyaan}.png`;
+        const storageRef = firebaseRef(storage, pathGambar);
+
+        await uploadBytes(storageRef, fileInput)
+        .then((snapshot) => {
+            console.log("berhasil");
+            console.log(snapshot);
+        });
+        postDataGambar.value.namaGambar = idPertanyaan;
+        postDataGambar.value.path = pathGambar;
+
+        try {
+        const response = await tambahGambar(idPertanyaan, postDataGambar.value);
+
+        console.log('Gambar berhasil diunggah:', response.data);
+        // Tambahkan logika lain yang diperlukan setelah unggah gambar berhasil
+        } catch (error) {
+        console.error('Error mengunggah gambar:', error);
+        // Tambahkan logika lain yang diperlukan jika terjadi kesalahan
+        }
+  }
+};
 </script>
 
 <template>    
