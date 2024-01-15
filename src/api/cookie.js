@@ -38,4 +38,4 @@ export const logout = async () => {
     document.cookie = `${cookieName}=; expires=${expirationDate.toUTCString()}; path=/`;
   
     console.log('Logout successful');
-  };
+};
