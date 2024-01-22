@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { getTokenCookie } from './cookie';
 
-// const URI = 'http://127.0.0.1:8091/api'
-const URI = 'https://tanya-app-production.up.railway.app/api/'
+// const URI = 'http://127.0.0.1:8091/api/'
+const URI = 'https://tanya-app-production.up.railway.app/api'
 
 export const apiService = axios.create({
   baseURL: URI

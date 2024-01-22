@@ -3,8 +3,10 @@
 import { RouterLink , useRouter } from 'vue-router';
 import { ref , onMounted } from 'vue'
 import { logout } from '@/api/cookie';
+import { profil } from '@/api/profil';
 
-const props = defineProps(['show' , 'username'])
+
+defineProps(['show' , 'username'])
 const route = useRouter()
 const nama = ref('')
 
@@ -14,9 +16,8 @@ const keluar = async () => {
 }
 
 onMounted(async () => {
-    setTimeout(() => {
-        nama.value = props.username 
-    },300)
+    const response = await profil()
+    nama.value = response.data.username
 })
 </script>
 
