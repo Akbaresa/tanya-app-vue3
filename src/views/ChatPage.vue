@@ -14,7 +14,7 @@ const sendMessage = async () => {
     const response = await profil()
     username.value = response.data.username
     
-    axios.post('http://localhost:8082/api/messages', {
+    axios.post('https://tanya-chat-production.up.railway.app/api/messages', {
         sender: username.value,
         content: message.value,
 
@@ -32,7 +32,7 @@ const sendMessage = async () => {
 const fetchMessages = async () => {
     const response = await profil()
     username.value = response.data.username
-    axios.get('http://localhost:8082/api/messages')
+    axios.get('https://tanya-chat-production.up.railway.app/api/messages')
     .then(response => {
         console.log('Messages received:', response.data);
         messages.value = response.data;
